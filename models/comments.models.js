@@ -8,6 +8,11 @@ const Commentschema = new mongoose.Schema({
     OwnerID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
+    },
+    onPost:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post"
+
     }
     },
     {
