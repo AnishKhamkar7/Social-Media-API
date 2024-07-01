@@ -11,6 +11,11 @@ app.use(express.json())
 
 
 
+//routes
+import Postroutes from "../routes/post.routes.js"
+
+app.use('/api/v1', Postroutes)
+
 
 
 export { app }
