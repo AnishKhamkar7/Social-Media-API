@@ -1,14 +1,16 @@
 import { Router } from "express";
-import { Uploadtext, ViewPosts } from "../controllers/post.controller.js";
+import { Uploadtext, ViewPosts, viewSinglePost } from "../controllers/post.controller.js";
 import { uploadComment } from "../controllers/comment.controllers.js";
 
 const router = Router()
 
-router.route('/textpost').post(Uploadtext)
+router.route('/textpost/upload').post(Uploadtext)
 
-router.route("/").get(ViewPosts)
+router.route("/textpost").get(ViewPosts)
 
 router.route("/comment/:_id").post(uploadComment)
+
+router.route("/textpost/:_id").get(viewSinglePost)
 
 
 export default router
