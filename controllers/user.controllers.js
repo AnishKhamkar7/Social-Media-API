@@ -1,4 +1,5 @@
-import { User } from "../models/user.model"
+import { User } from "../models/user.model.js"
+
 
 
 const registerUser = (async(req,res)=>{
@@ -30,13 +31,61 @@ const registerUser = (async(req,res)=>{
 
         //save the data into the model
 
-        await User.create({
+
+
+        const user = await User.create({
             username: username,
-            password: password
+            password: password,
+            email: email
         })
+        //find the user into the database and if not return error
+        const createdUser = await User.findById(user._id).select("-password -refreshToken")
+
+        if (!createdUser) {
+            res
+            .status(500)
+            .json({
+                message: "Something went wrong"
+            })
+        }
+
+        return res.status(200)
+        .json(createdUser)
+
+
+    } catch (error) {
+        res
+        .status(500)
+        .json({
+                message: error.message
+            })
+        
+    }
+})
+
+
+const loginUser = (async(req,res)=>{
+    try {
+        const { username, email, password } = req.body
+
+    const checkUser = await User.findOne({
+        $or:[{username},{email}]
+    })
+
+    if(!checkUser){
+        res
+        .status(400)
+        .json("user not registered")
+    }
+
+
+
+
 
 
     } catch (error) {
         
     }
 })
+
+export { registerUser, loginUser }
