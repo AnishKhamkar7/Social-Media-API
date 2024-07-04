@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { Uploadtext, ViewPosts, viewSinglePost, } from "../controllers/post.controller.js";
 import { uploadComment } from "../controllers/comment.controllers.js";
-import { registerUser } from "../controllers/user.controllers.js";
+import { registerUser, loginUser } from "../controllers/user.controllers.js";
 
 const router = Router()
 // upload text
@@ -15,6 +15,8 @@ router.route("/textpost/:_id").get(viewSinglePost)
 
 //register user
 router.route("/register").post(registerUser)
+//user login
 
+router.route("/login").post(loginUser)
 
 export default router

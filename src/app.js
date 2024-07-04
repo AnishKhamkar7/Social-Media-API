@@ -8,11 +8,13 @@ app.use(express.urlencoded(
     }
 ))
 app.use(express.json())
+app.use(cookieParser())
 
 
 
 //routes
 import Postroutes from "../routes/post.routes.js"
+import cookieParser from "cookie-parser"
 
 app.use('/api/v1', Postroutes)
 

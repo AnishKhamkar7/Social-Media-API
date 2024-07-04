@@ -1,4 +1,26 @@
 import { User } from "../models/user.model.js"
+import cookieParser from "cookie-parser"
+import jwt from "jsonwebtoken"
+
+const generateAcesssandRefreshToken = (async(UserId)=>{
+   try {
+
+    const user = await User.findById(UserId)
+    const accessToken = await user.generateAccessToekn()
+    const refreshToken = await user.generateRefreshToekn()
+
+    user.refreshToken = refreshToken
+    await user.save({validateBeforeSave:false})
+
+    return { accessToken,refreshToken }
+
+ 
+   } catch (error) {
+
+    console.log(error)
+
+   }
+})
 
 
 
@@ -78,13 +100,30 @@ const loginUser = (async(req,res)=>{
         .json("user not registered")
     }
 
+    const check = await checkUser.isPasswordCorrect(password)
 
 
+    if(!check){
+        return res.status(404).json("Incorrect password")
+    }
 
+    const {accessToken,refreshToken} = await generateAcesssandRefreshToken(checkUser._id)
 
+    const loggedInuser = await User.findById(checkUser._id).select( "-password -refreshToken")
+
+    const options = {
+        httyOnly: true,
+        secure: true
+    }
+
+    res
+    .status(200)
+    .cookie("AccesToken",accessToken,options)
+    .cookie("RefreshToken",refreshToken)
+    .json(loggedInuser,accessToken,refreshToken)
 
     } catch (error) {
-        
+        res.status(400).json({messgae:error.message})
     }
 })
 
