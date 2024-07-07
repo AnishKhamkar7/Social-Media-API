@@ -4,17 +4,23 @@ import { Comment } from "../models/comments.models.js"
 
 const Uploadtext = (async(req,res) =>{
    try {
+
+    const user = req.user
+
     const { textPost } = req.body
-    const postText = await Post.create({textPost})
+    const postText = await Post.create({textPost,
+        Owner: user._id
+    })
+
 
     if(!postText){
-        res.status(400).json({
+        return res.status(400).json({
             message: "upload failed"
         })
     }
-    return res
+    res
     .status(200)
-    .json("Post uploaded sucefully")
+    .json(postText)
 
    } catch (error) {
     res.status(400).json(postText)
@@ -29,7 +35,7 @@ const ViewPosts = (async(req,res)=>{
         const viewposts = await Post.find({})
 
         if (!viewposts) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: "Cannot retireve posts!"
             })
         }
@@ -92,7 +98,10 @@ const viewSinglePost = (async(req,res)=>{
                 $group: {
                     _id: '$_id',
                     textPost: { $first: '$textPost' },
-                    Comments: { $push: '$PostwithComment.commentText' },
+                    Comments: { $push: {
+                        Username: `$PostwithComment.OwnerID`,
+                        commentText:'$PostwithComment.commentText' }
+                    },
                     CommentCount: {$first: "$CommentCount"}
                 }
             },

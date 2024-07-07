@@ -4,7 +4,7 @@ const Postschema = new mongoose.Schema({
     PostUrl: {              //cloudinary url
         type: String,
     },
-    caption:{
+    caption:{      
         type:String,
     },
     Owner:{
