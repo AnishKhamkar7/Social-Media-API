@@ -27,7 +27,7 @@ const uploadComment = (async(req,res)=>{
     })
     
     if(!createdComment){
-    res
+    return res
     .status(400)
     .json("EROOR WHILE SAVING THE COMMENT")
     console.log("EROOR WHILE SAVING THE COMMENT");

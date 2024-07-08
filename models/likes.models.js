@@ -1,11 +1,15 @@
 import mongoose, { Schema } from "mongoose";
 
 const Likeschema = new mongoose.Schema({
-    PostLikedBy:{
+    PostLikedOnID:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post"
+    },
+    UserID:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
-    CommentLikedBy: {
+    CommentLikedOnID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Commment"
     }

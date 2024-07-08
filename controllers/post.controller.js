@@ -53,7 +53,7 @@ const ViewPosts = (async(req,res)=>{
 const viewSinglePost = (async(req,res)=>{
     try {
         const { _id } = req.params
-    
+
         if (!_id) {
             res
             .status(400)
@@ -62,8 +62,8 @@ const viewSinglePost = (async(req,res)=>{
         }
 
         const hello = await Post.findById(_id)
-    
         
+    
         const postwithcom = await Post.aggregate([
             {
                 $match:{
@@ -82,12 +82,14 @@ const viewSinglePost = (async(req,res)=>{
             },
             {
                 $addFields:{
+                   
                     CommentCount: {
                         $size: "$PostwithComment"
                     }
 
                 }
             },
+            
             {
                 $unwind: {
                   path: '$PostwithComment',
@@ -95,6 +97,7 @@ const viewSinglePost = (async(req,res)=>{
                 },
             },
             {
+                
                 $group: {
                     _id: '$_id',
                     textPost: { $first: '$textPost' },
