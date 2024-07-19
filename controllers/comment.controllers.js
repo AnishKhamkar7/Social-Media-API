@@ -13,7 +13,6 @@ const uploadComment = (async(req,res)=>{
         .json({
             message: "ERROR WHILE RETIREVEING THE POST ID"
         })
-        console.log("ERROR WHILE RETIREVEING THE POST ID");
     }
 
     const user = req.user
@@ -30,7 +29,6 @@ const uploadComment = (async(req,res)=>{
     return res
     .status(400)
     .json("EROOR WHILE SAVING THE COMMENT")
-    console.log("EROOR WHILE SAVING THE COMMENT");
     }
     
     return res
