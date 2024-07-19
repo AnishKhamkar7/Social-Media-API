@@ -97,4 +97,48 @@ const LikeComment = async(req,res) =>{
     }
 }
 
-export { LikePost,LikeComment  }
+//delete like on post and comment --->
+
+const UnlikePost = async(req,res) =>{
+  try {
+      const { _id } = req.params
+  
+      const user = req.user
+  
+      const getPost = await Post.findById(_id)
+        
+        if (!getPost) {
+            return res
+            .status(400)
+            .json("Post ID invalid or not available")
+        }
+
+        //first check whether the user has alreaday unliked the post or not
+
+        const verifyUnlike = await Like.findOne({
+            PostLikedOnID: getPost._id,
+            UserID: user._id
+        })
+
+        if(!verifyUnlike){
+            return res.status(400).json({ message: 'You cannot unlike the post again' })
+        }
+
+        await Like.deleteOne({_id: verifyUnlike._id})
+
+        const crossverify = await Like.findById(verifyUnlike._id)
+
+        if (crossverify) {
+            return res.status(400).json({message:"somwthing went wrong druing unnlike"})
+        }
+
+        return res.status(200).json({message: "Unliked sucessfully"})
+  
+  } catch (error) {
+    return res.status(400).json({"ERROR:":error})
+
+  }
+}
+
+
+export { LikePost,LikeComment, UnlikePost  }

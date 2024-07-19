@@ -3,7 +3,7 @@ import { Uploadtext, ViewPosts, viewSinglePost, } from "../controllers/post.cont
 import { uploadComment } from "../controllers/comment.controllers.js";
 import { registerUser, loginUser } from "../controllers/user.controllers.js";
 import { vertfyJWT } from "../middlewares/auth.middleware.js";
-import { LikeComment, LikePost } from "../controllers/likes.controllers.js";
+import { LikeComment, LikePost, UnlikePost } from "../controllers/likes.controllers.js";
 
 const router = Router()
 // upload text
@@ -29,6 +29,9 @@ router.route("/textpost/like/:_id").post(vertfyJWT,LikePost)
 
 //like comment
 router.route("/comment/like/:_id").post(vertfyJWT,LikeComment)
+
+//unlike post
+router.route("/textpost/unlike/:_id").delete(vertfyJWT,UnlikePost)
 
 
 
