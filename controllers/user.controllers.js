@@ -127,4 +127,10 @@ const loginUser = (async(req,res)=>{
     }
 })
 
+const userProfile = async(req,res)=>{
+    
+}
+
+
+
 export { registerUser, loginUser }
