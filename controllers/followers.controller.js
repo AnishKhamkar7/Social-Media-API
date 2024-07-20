@@ -56,4 +56,52 @@ const followUser = async(req,res)=>{
 
 }
 
-export { followUser }
+const unfollowUser = async(req,res)=>{
+    try {
+        const user = req.user
+
+        const { _id } = req.params
+
+        const checkuser = await User.findById(_id)
+
+        if (!checkuser || !user) {
+            return res.status(400).json({
+                message:"User not found"
+            })
+        }
+
+        const verifyFollower = await Follow.findOne({
+            follower: user._id,
+            page: checkuser._id
+        })
+
+        if (!verifyFollower) {
+            return res.status(400).json({
+                message:"You cannot unfollow this User again"
+            })
+        }
+
+        await Follow.deleteOne({
+            _id: verifyFollower._id
+        })
+
+        const crossCheck = await Follow.findById(verifyFollower._id)
+
+        if (crossCheck) {
+            return res.status(400).json({
+                message:"User Unfollow failed !!!"
+            })
+        }
+
+        return res.status(200).json({
+            message: "You Unfollowed this User"
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        })
+    }
+}
+
+export { followUser,unfollowUser }
