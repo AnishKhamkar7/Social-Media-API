@@ -4,7 +4,8 @@ import { uploadComment } from "../controllers/comment.controllers.js";
 import { registerUser, loginUser } from "../controllers/user.controllers.js";
 import { vertfyJWT } from "../middlewares/auth.middleware.js";
 import { LikeComment, LikePost, UnlikePost } from "../controllers/likes.controllers.js";
-import { verify } from "jsonwebtoken";
+import { followUser, unfollowUser } from "../controllers/followers.controller.js";
+
 
 const router = Router()
 // upload text
@@ -29,7 +30,10 @@ router.route("/comment/like/:_id").post(vertfyJWT,LikeComment)
 router.route("/textpost/unlike/:_id").delete(vertfyJWT,UnlikePost)
 
 //follow User
-router.route("/follow/:_id").post(vertfyJWT)
+router.route("/follow/:_id").post(vertfyJWT,followUser)
+
+// unfollow User
+router.route("/unfollow/:_id").post(vertfyJWT,unfollowUser)
 
 
 
