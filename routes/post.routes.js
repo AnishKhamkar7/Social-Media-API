@@ -8,11 +8,6 @@ import { followUser, unfollowUser } from "../controllers/followers.controller.js
 
 
 const router = Router()
-// upload text
-router.route('/textpost/upload').post(vertfyJWT,Uploadtext)
-
-//upload comments on sepcific post with epcific account
-router.route("/comment/:_id").post(vertfyJWT,uploadComment)
 
 //register user
 router.route("/register").post(registerUser)
@@ -23,11 +18,17 @@ router.route("/login").post(loginUser)
 //update User profile
 router.route("/updateProfile").post(updateProfile)
 
+// upload text
+router.route('/textpost/upload').post(vertfyJWT,Uploadtext)
+
 //like post
-router.route("/textpost/like/:_id").post(vertfyJWT,LikePost)
+router.route("/textpost/like/:Post_id").post(vertfyJWT,LikePost)
+
+//upload comments on accounts post
+router.route("/comment/:_id").post(vertfyJWT,uploadComment)
 
 //like comment
-router.route("/comment/like/:_id").post(vertfyJWT,LikeComment)
+router.route("/comment/like/:Comment_id").post(vertfyJWT,LikeComment)
 
 //unlike post
 router.route("/textpost/unlike/:_id").post(vertfyJWT,UnlikePost)
@@ -37,7 +38,6 @@ router.route("/follow/:_id").post(vertfyJWT,followUser)
 
 // unfollow User
 router.route("/unfollow/:_id").post(vertfyJWT,unfollowUser)
-
 
 
 

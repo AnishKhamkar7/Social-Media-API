@@ -6,11 +6,11 @@ import { Comment } from "../models/comments.models.js";
 const LikePost = async(req,res)=>{
     try {
         //fetch id from the url
-        const { _id } = req.params
+        const { Post_id } = req.params
         //get this user because if you are able to like then you must be loggedin
         const user = req.user
   
-        const getpost = await Post.findById(_id)
+        const getpost = await Post.findById(Post_id)
         
         if (!getpost) {
             return res
@@ -53,11 +53,11 @@ const LikePost = async(req,res)=>{
 
 const LikeComment = async(req,res) =>{
     try {
-        const { _id } = req.params
+        const { Comment_id } = req.params
 
         const user = req.user
 
-        const getcomment = await Comment.findById(_id)
+        const getcomment = await Comment.findById(Comment_id)
 
         if(!getcomment) {
             return res.status(400).json({message: "comment ID not found or unavailable"})
