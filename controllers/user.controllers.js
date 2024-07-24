@@ -128,7 +128,7 @@ const loginUser = (async(req,res)=>{
 })
 
 const userProfile = async(req,res)=>{
-    
+    const user = req.body
 }
 
 
