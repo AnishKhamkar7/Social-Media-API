@@ -127,10 +127,64 @@ const loginUser = (async(req,res)=>{
     }
 })
 
-const userProfile = async(req,res)=>{
-    const user = req.body
+// const userProfile = async(req,res)=>{
+//     const user = req.body
+// }
+
+const updateProfile = async(req,res) =>{
+    try {
+        const user = req.user
+
+        const { username, password } = req.body
+
+        if(!username && !password){
+            return res.statu(400).json({
+                message: "Both of the fields are empty"
+            })
+        }
+
+        if(username){
+            user.username = username
+            const newUsername = await user.save()
+
+            if(!newUsername){
+                return res.status(400).json({
+                    message:" New Username update Failed !!"
+                })
+            }
+
+        }
+
+        if(password){
+
+            const checkPassword = await user.isPasswordCorrect(password)
+
+            if(checkPassword){
+                return res.status(400).json({
+                    message: "Please enter a new Password"
+                })
+            }
+
+            user.password = password
+            const newPassword = await user.save()
+
+            if(!newPassword){
+                return res.status(400).json({
+                    message: "New password update Failed!!"
+                })
+            }
+        }
+
+        return res.status(200).json({
+            message: "Credentials Updated"
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        })
+    }
 }
 
 
 
-export { registerUser, loginUser }
+export { registerUser, loginUser,updateProfile }
