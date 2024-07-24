@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { Uploadtext, ViewPosts, viewSinglePost, } from "../controllers/post.controller.js";
 import { uploadComment } from "../controllers/comment.controllers.js";
-import { registerUser, loginUser } from "../controllers/user.controllers.js";
+import { registerUser, loginUser, updateProfile } from "../controllers/user.controllers.js";
 import { vertfyJWT } from "../middlewares/auth.middleware.js";
 import { LikeComment, LikePost, UnlikePost } from "../controllers/likes.controllers.js";
 import { followUser, unfollowUser } from "../controllers/followers.controller.js";
@@ -20,6 +20,9 @@ router.route("/register").post(registerUser)
 //user login
 router.route("/login").post(loginUser)
 
+//update User profile
+router.route("/updateProfile").post(updateProfile)
+
 //like post
 router.route("/textpost/like/:_id").post(vertfyJWT,LikePost)
 
@@ -34,6 +37,8 @@ router.route("/follow/:_id").post(vertfyJWT,followUser)
 
 // unfollow User
 router.route("/unfollow/:_id").post(vertfyJWT,unfollowUser)
+
+
 
 
 
