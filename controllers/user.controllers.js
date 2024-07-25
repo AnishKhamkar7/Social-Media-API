@@ -32,7 +32,7 @@ const registerUser = (async(req,res)=>{
 
         //check if all the required fields are filled
         if(!username || !password || !email){
-            res
+            return res
             .status(400)
             .json("All Fields are required")
         }
@@ -46,7 +46,7 @@ const registerUser = (async(req,res)=>{
         //if found then return user already exists
 
         if (userAvail) {
-            res
+            return res
             .status(409)
             .json("Username or email already exists")
         }
@@ -64,7 +64,7 @@ const registerUser = (async(req,res)=>{
         const createdUser = await User.findById(user._id).select("-password -refreshToken")
 
         if (!createdUser) {
-            res
+            return res
             .status(500)
             .json({
                 message: "Something went wrong"
@@ -95,7 +95,7 @@ const loginUser = (async(req,res)=>{
     })
 
     if(!checkUser){
-        res
+        return res
         .status(400)
         .json("user not registered")
     }
