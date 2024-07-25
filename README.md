@@ -28,26 +28,7 @@ This is a RESTful API for a social media application where users can follow each
 
 1. Clone the repository:
     ```bash
-    git clone <repository-url>
-    cd <project-directory>
+    git clone https://github.com/AnishKhamkar7/Social-Media-API.git
     ```
 
-2. Install server dependencies:
-    ```bash
-    cd server
-    npm install
-    ```
 
-3. Install client dependencies:
-    ```bash
-    cd ../client
-    npm install
-    ```
-
-### Environment Variables
-Create a `.env` file in the `server` directory and add the following environment variables:
-
-```env
-PORT=3000
-MONGO_URI=<your-mongodb-uri>
-JWT_SECRET=<your-jwt-secret>
