@@ -17,7 +17,6 @@ This is a RESTful API for a social media application where users can follow each
 - Express.js
 - MongoDB (Mongoose)
 - JWT (JSON Web Tokens) for Authentication
-- Joi for Validation
 
 ## Getting Started
 
