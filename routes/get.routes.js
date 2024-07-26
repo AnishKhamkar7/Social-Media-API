@@ -5,4 +5,4 @@ import { ViewPosts,viewSinglePost } from "../controllers/post.controller.js";
 router.route("/textpost").get(ViewPosts)
 
 //view single post with comments on it
-router.route("/textpost/:_id").get(viewSinglePost)
+router.route("/textpost/:Post_id").get(viewSinglePost)

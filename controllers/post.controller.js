@@ -52,7 +52,7 @@ const ViewPosts = (async(req,res)=>{
 
 const viewSinglePost = (async(req,res)=>{
     try {
-        const { _id } = req.params
+        const { Post_id } = req.params
 
         if (!_id) {
             res
