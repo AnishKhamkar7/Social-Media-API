@@ -97,7 +97,7 @@ const loginUser = (async(req,res)=>{
     if(!checkUser){
         return res
         .status(400)
-        .json("user not registered")
+        .json("User does not exists")
     }
 
     const check = await checkUser.isPasswordCorrect(password)
