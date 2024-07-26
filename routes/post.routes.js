@@ -16,7 +16,7 @@ router.route("/register").post(registerUser)
 router.route("/login").post(loginUser)
 
 //update User profile
-router.route("/updateProfile").post(updateProfile)
+router.route("/updateProfile").post(vertfyJWT,updateProfile)
 
 // upload text
 router.route('/textpost/upload').post(vertfyJWT,Uploadtext)
