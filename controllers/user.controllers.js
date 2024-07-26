@@ -133,56 +133,71 @@ const loginUser = (async(req,res)=>{
 
 const updateProfile = async(req,res) =>{
     try {
-        const user = req.user
+        const user = req.user; 
 
-        const { username, password } = req.body
-
-        if(!username && !password){
-            return res.statu(400).json({
-                message: "Both of the fields are empty"
-            })
+        const { username, password } = req.body;
+    
+        if (!username && !password) {
+            return res.status(400).json({
+                message: "Both username and password fields are empty"
+            });
+        }
+    
+        if (username && username === user.username) {
+            return res.status(400).json({
+                message: "New username is the same as the current username"
+            });
         }
 
-        if(username){
-            user.username = username
-            const newUsername = await user.save()
-
-            if(!newUsername){
+        if (username) {
+            const existingUser = await User.findOne({ username });
+    
+            if (existingUser) {
                 return res.status(400).json({
-                    message:" New Username update Failed !!"
-                })
+                    message: "Username already exists"
+                });
+            }
+    
+            user.username = username;
+            const updatedUser = await user.save(); 
+    
+            if (!updatedUser) {
+                message: "Username update failed"
+                return res.status(400).json({
+            });
             }
 
         }
 
-        if(password){
-
-            const checkPassword = await user.isPasswordCorrect(password)
-
-            if(checkPassword){
+        if (password) {
+            const isPasswordCorrect = await user.isPasswordCorrect(password);
+    
+            if (isPasswordCorrect) {
                 return res.status(400).json({
-                    message: "Please enter a new Password"
-                })
+                    message: "New password cannot be the same as the current password"
+                });
             }
-
-            user.password = password
-            const newPassword = await user.save()
-
-            if(!newPassword){
-                return res.status(400).json({
-                    message: "New password update Failed!!"
-                })
+            
+            user.password = password;
+            
+            const updatedUserWithPassword = await user.save(); 
+            if (!updatedUserWithPassword) {
+            return res.status(400).json({
+                    message: "Password update failed"
+                });
             }
         }
-
+        
         return res.status(200).json({
-            message: "Credentials Updated"
-        })
+        message: "Profile updated successfully"
+    });
     } catch (error) {
         return res.status(500).json({
             message: error.message
-        })
+        });
     }
+ 
+
 }
 
 
