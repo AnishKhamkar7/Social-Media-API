@@ -31,7 +31,7 @@ router.route("/comment/:Post_id").post(vertfyJWT,uploadComment)
 router.route("/comment/like/:Comment_id").post(vertfyJWT,LikeComment)
 
 //unlike post
-router.route("/textpost/unlike/:_id").post(vertfyJWT,UnlikePost)
+router.route("/textpost/unlike/:Post_id").post(vertfyJWT,UnlikePost)
 
 //follow User
 router.route("/follow/:_id").post(vertfyJWT,followUser)

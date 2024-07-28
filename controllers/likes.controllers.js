@@ -101,11 +101,11 @@ const LikeComment = async(req,res) =>{
 
 const UnlikePost = async(req,res) =>{
   try {
-      const { _id } = req.params
+      const { Post_id } = req.params
   
       const user = req.user
   
-      const getPost = await Post.findById(_id)
+      const getPost = await Post.findById(Post_id)
         
         if (!getPost) {
             return res
