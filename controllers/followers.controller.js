@@ -6,9 +6,9 @@ const followUser = async(req,res)=>{
     try {
         const user = req.user   
     
-        const {_id } = req.params
+        const { User_id } = req.params
     
-        const checkuser = await User.findById(_id)
+        const checkuser = await User.findById(User_id)
         
         //check user avialability
 
@@ -60,9 +60,9 @@ const unfollowUser = async(req,res)=>{
     try {
         const user = req.user
 
-        const { _id } = req.params
+        const { User_id } = req.params
 
-        const checkuser = await User.findById(_id)
+        const checkuser = await User.findById(User_id)
 
         if (!checkuser || !user) {
             return res.status(400).json({

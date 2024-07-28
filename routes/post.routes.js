@@ -34,10 +34,10 @@ router.route("/comment/like/:Comment_id").post(vertfyJWT,LikeComment)
 router.route("/textpost/unlike/:Post_id").post(vertfyJWT,UnlikePost)
 
 //follow User
-router.route("/follow/:_id").post(vertfyJWT,followUser)
+router.route("/follow/:User_id").post(vertfyJWT,followUser)
 
 // unfollow User
-router.route("/unfollow/:_id").post(vertfyJWT,unfollowUser)
+router.route("/unfollow/:User_id").post(vertfyJWT,unfollowUser)
 
 
 
