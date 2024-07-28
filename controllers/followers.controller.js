@@ -1,5 +1,6 @@
 import { User } from "../models/user.model.js"
 import { Follow } from "../models/followers.models.js"
+import { Like } from "../models/likes.models.js"
 
 
 const followUser = async(req,res)=>{
@@ -20,7 +21,7 @@ const followUser = async(req,res)=>{
 
         //once the user is valid then check if you already have followed the user or not
 
-        const vertifyfollower = await Like.findOne({
+        const vertifyfollower = await Follow.findOne({
             follower: user._id,
             page: checkuser._id
         })

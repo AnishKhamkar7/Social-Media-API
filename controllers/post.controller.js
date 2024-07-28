@@ -57,14 +57,14 @@ const viewSinglePost = (async(req,res)=>{
     try {
         const { Post_id } = req.params
 
-        if (!_id) {
+        if (!Post_id) {
             res
             .status(400)
             .json("Invalid post ID")
             console.log("Invalid post ID");
         }
 
-        const hello = await Post.findById(_id)
+        const hello = await Post.findById(Post_id)
         
     
         const postwithcom = await Post.aggregate([
@@ -121,7 +121,6 @@ const viewSinglePost = (async(req,res)=>{
                 }
             }
         ])
-        console.log(postwithcom);
     
         if(!postwithcom?.length){
             res.status(401)
