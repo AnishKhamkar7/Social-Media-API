@@ -20,7 +20,10 @@ const Uploadtext = (async(req,res) =>{
     }
     res
     .status(200)
-    .json(postText)
+    .json({
+        message: "Post Uploaded Successfully",
+        textPost: postText
+    })
 
    } catch (error) {
     res.status(400).json(postText)
