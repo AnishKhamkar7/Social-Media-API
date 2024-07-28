@@ -25,7 +25,7 @@ router.route('/textpost/upload').post(vertfyJWT,Uploadtext)
 router.route("/textpost/like/:Post_id").post(vertfyJWT,LikePost)
 
 //upload comments on accounts post
-router.route("/comment/:_id").post(vertfyJWT,uploadComment)
+router.route("/comment/:Post_id").post(vertfyJWT,uploadComment)
 
 //like comment
 router.route("/comment/like/:Comment_id").post(vertfyJWT,LikeComment)

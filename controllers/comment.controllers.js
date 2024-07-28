@@ -3,9 +3,9 @@ import { Comment } from "../models/comments.models.js"
 
 const uploadComment = (async(req,res)=>{
    try {
-    const { _id } = req.params
+    const { Post_id } = req.params
 
-    const getpost = await Post.findById(_id)
+    const getpost = await Post.findById(Post_id)
 
     if (!getpost) {
         return res
