@@ -1,7 +1,7 @@
-# Social Media Application API
+# SocialSphere
 
 ## Overview
-This is a RESTful API for a social media application where users can follow each other, like posts, comment on posts, like comments, view profiles, authenticate, and update their username or password.
+This is a RESTful API for a SocialSphere where users can follow each other, like posts, comment on posts, like comments, view profiles, authenticate, and update their username or password.
 
 ## Features
 - User Authentication (Signup, Login, Logout)
